@@ -1,0 +1,5 @@
+p {
+  text-align: center;
+  color: var(--gray-700);
+  font-weight: bold;
+}
