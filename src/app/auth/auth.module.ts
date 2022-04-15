@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from '../primeng/primeng.module';
 import { SharedModule } from '../shared/shared.module';
+
 
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -24,8 +26,9 @@ import { RecoverPasswordFormComponent } from './components/recover-password-form
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ReactiveFormsModule,
     PrimengModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AuthModule { }

@@ -1,56 +1,67 @@
-<!-- [style]="{ width: '25rem', 'margin-bottom': '2em' }" -->
 <p-card class="card">
   <div class="title__header">
     <h1>Biblioteca virtual</h1>
     <h2>Registro, ingrese sus datos solicitados.</h2>
   </div>
-  <form>
+  <div class="form__group" *ngIf="response">
+    <p class="response" >{{ (response?.error) ? response.error : response.message}}</p>
+  </div>
+  <form [formGroup]="formRegister"  (ngSubmit)="register()" >
     <div class="form__group">
       <span class="p-float-label">
-        <input type="text" pInputText />
+        <input type="text" pInputText formControlName ="name"  />
         <label>Nombre</label>
       </span>
-      <p class="error__message">Nombre debe tener entre 1 a 100 caracteres.</p>
+      <p  error-msg message="El nombre es obligatorio."  [validate]="hasErrorRequired('name')"></p>
+      <p  error-msg message="Nombre debe tener entre 5 a 100 caracteres."  [validate]="hasErrorFormat('name')"></p>
     </div>
     <div class="form__group">
       <span class="p-float-label">
-        <input type="text" pInputText />
+        <input type="text" pInputText  formControlName ="surname" />
         <label>Apellidos</label>
       </span>
-      <p class="error__message">Usuario debe tener entre 1 a 100 caracteres.</p>
+      <p  error-msg message="Los apellidos son obligatorios."  [validate]="hasErrorRequired('surname')"></p>
+      <p  error-msg message="Los apellidos deben tener entre 5 a 100 caracteres."  [validate]="hasErrorFormat('surname')"></p>
     </div>
     <div class="form__group">
       <span class="p-float-label">
-        <input type="email" pInputText />
+        <input type="email" pInputText  formControlName ="email"/>
         <label>Correo electrónico </label>
       </span>
-      <p class="error__message">Correo electrónico invalido.</p>
+      <p  error-msg message="El correo electrónico es obligatorio."  [validate]="hasErrorRequired('email')"></p>
+      <p  error-msg message="Correo electrónico invalido."  [validate]="hasErrorEmail('email')"></p>
     </div>
     <div class="form__group">
       <span class="p-float-label">
-        <input type="text" pInputText />
+        <input type="text" pInputText  formControlName ="username" />
         <label>Nombre de usuario</label>
       </span>
-      <p class="error__message">Usuario debe tener entre 1 a 50 caracteres.</p>
+      <p  error-msg message="Nombre de usuario es obligatorio."  [validate]="hasErrorRequired('username')"></p>
+      <p  error-msg message="Nombre de usuario debe tener entre 6 a 50 caracteres."  [validate]="hasErrorFormat('username')"></p>
     </div>
     <div class="form__group">
       <span class="p-float-label">
-        <input type="password" pPassword [feedback]="false" />
+        <input type="password" pPassword [feedback]="false"  formControlName ="password" />
         <label>Contraseña</label>
       </span>
-      <p class="error__message">
-        Contraseña debe tener entre 1 a 30 caracteres.
-      </p>
+      <p  error-msg message="La contraseña es obligatoria."  [validate]="hasErrorRequired('password')"></p>
+      <p  error-msg message="Contraseña debe tener entre 6 a 30 caracteres."  [validate]="hasErrorFormat('password')"></p>
     </div>
     <div class="form__group">
       <span class="p-float-label">
-        <input type="password" pPassword [feedback]="false" />
+        <input type="password" pPassword [feedback]="false"  formControlName ="confirmPassword" />
         <label>Confirmar contraseña</label>
       </span>
-      <p class="error__message">Las contraseñas no son iguales.</p>
+      <p  error-msg message="Confirmar contraseña es obligatoria."  [validate]="hasErrorRequired('confirmPassword')"></p>
+      <p  error-msg message="Confirmar contraseña debe tener entre 6 a 30 caracteres."  [validate]="hasErrorFormat('confirmPassword')"></p>
+      <p class="error__message hidden" #confirmPass >Las contraseñas no son iguales.</p>
     </div>
     <div class="form__group">
       <p>¿Ya tengo cuenta? <a routerLink="login">Ingresar</a></p>
+    </div>
+    <div class="form__group" *ngIf="loading" >
+      <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
+      <p>Espere un momento, estamos creando su cuenta de usuario.</p>
     </div>
     <button
       pButton
@@ -59,6 +70,7 @@
       label="Crear cuenta"
       class="p-button-secondary btn__login"
       icon="pi pi-check"
+      [disabled]="formRegister.invalid"
     ></button>
   </form>
 </p-card>
