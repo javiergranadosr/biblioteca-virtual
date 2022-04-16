@@ -6,8 +6,8 @@
 }
 
 body {
+  margin-top: 15px;
   background-color: #eeeeee;
-  height: 100vh;
 }
 
 .hidden {
@@ -21,6 +21,11 @@ body {
 .error__message {
   font-weight: bold;
   color: var(--red-700);
+}
+
+.response {
+  font-weight: bold !important;
+  margin-bottom: 30px !important;
 }
 
 

@@ -20,11 +20,6 @@
   cursor: pointer;
 }
 
-.response {
-  font-weight: bold !important;
-  margin-bottom: 30px !important;
-}
-
 input {
   width: 100%;
 }

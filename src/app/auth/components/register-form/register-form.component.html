@@ -60,8 +60,7 @@
       <p>¿Ya tengo cuenta? <a routerLink="login">Ingresar</a></p>
     </div>
     <div class="form__group" *ngIf="loading" >
-      <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
-      <p>Espere un momento, estamos creando su cuenta de usuario.</p>
+      <app-loading message="Espere un momento, estamos creando su cuenta de usuario." ></app-loading>
     </div>
     <button
       pButton

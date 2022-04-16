@@ -89,24 +89,18 @@ export class RegisterFormComponent implements OnInit {
       } else {
         this.confirmPassword?.nativeElement.classList.add('hidden');
       }
-      this.authService.register(data).subscribe(
-        (resp: HttpResponse) => {
+      this.authService.register(data).subscribe((resp: HttpResponse) => {
+        this.loading = false;
+        this.response = resp;
+        if (resp.error) {
           this.loading = false;
-          this.response = resp;
-          if (!resp.error) {
-            setTimeout(() => {
-              this.router.navigateByUrl('');
-            }, 3000);
-          }
-          if (this.response.message) {
-            this.formRegister.reset();
-          }
-        },
-        (err) => {
-          this.loading = false;
-          console.log(err);
+        } else {
+          setTimeout(() => {
+            this.router.navigateByUrl('');
+          }, 3000);
+          this.formRegister.reset();
         }
-      );
+      });
     }
   }
 }
